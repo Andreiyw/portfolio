@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+
+    // сообщение можно интерпретировать как ассоциативный массив где есть key:value и затем уже вызывать по arr['key'] и arr['value'] и обрабатывать
+    // можно ещё сделать создание объекта:
+/*
+Задача:
+Нужно написать функцию, которая принимает в качестве параметра, ассоциативный массив (например: { code: 450, message: "OK. Operation was been success" }).
+Предполагается, что коды и сообщения могут быть разными, и в зависимости от кода нужно предпринимать различные действия.
+В тестовом примере, нужно реализовать следующие действия:
+code      Действие
+450                        Вывести в консоль "OK"
+506                        Выдать всплывающее сообщение (alert) с текстом ошибки
+310                        Перейти на yandex.ru
+570                        Вывести в консоль "ERROR" и alert с текстом ошибки
+605                        Добавить на страницу тег div с сообщением
+
+Возможности добавления новых действий для обрабатываемых кодов на будущее должно быть максимально простое.
+В задаче желательно не использовать условные операторы (if, switch case, while, for).
+
+
+
+
+
+
+Сначала получаем строку, затем разбиваем её методом split(':'), где первое - key (n), второе - value (n+1), чтобы не быть зависимым от длинны, если вдруг понадобится дополнить сообщение новыми
+параметрами, т е делаем это через счетчик for.
+
+
+
+object {
+code: x['code'},
+message: x['message']
+}
+
+
+Сделать комментарии, случаи ошибок и т д и т п
+сделать проверку на undefined
+ */
+
+
+    var error, code_value, message_value;
+
+    while (error == undefined) {
+        error = prompt('paste error here, without "{" and "}" ', 'code: 605, message: "OK. Operation was been success"');
+    }
+
+
+    while (code_value == undefined && message_value == undefined ) {
+
+        var divide = error.split(',');
+
+        for ( c=0; c<divide.length; c++ ) {
+
+            var foo  = divide[0].split(': ');
+
+            code_value = parseInt (foo[1]);
+        }
+
+        for ( c=0; c<divide.length; c++ ) {
+
+            var foo  = divide[1].split(': ');
+
+            message_value = foo[1];
+        }
+
+    }
+
+
+    var x, y, error_processing = {
+
+        code: code_value,
+        message: message_value,
+
+        def_code: function () {
+
+            switch (error_processing.code) {
+                case 450:
+                    console.log("OK");
+                    break;
+                case 506:
+                    alert(error_processing.message);
+                    break;
+                case 310:
+                    window.open('https://yandex.ru/');
+                    break;
+                case 570:
+                    console.log('ERROR');
+                    alert(error_processing.message);
+                    break;
+                case 605:
+                    var div = document.createElement('div');
+                    div.className = "alert alert-success";
+                    document.body.appendChild(div);
+                    div.appendChild(document.createTextNode(error_processing.message));
+                    break;
+            }
+
+        }
+
+    }
+
+    error_processing.def_code();
+
+
+</script>
+
+</body>
+</html>
