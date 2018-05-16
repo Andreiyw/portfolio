@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <title>Checker</title>
@@ -7,12 +6,34 @@
 <body>
 
 <script>
-
-    var error, code_value, message_value;
+    
+    var error, code_value, message_value; // инициализация переменных без задания типа;
 
     while (error == undefined) {
-        error = prompt('paste error here, without "{" and "}" ', 'code: 605, message: "OK. Operation was been success"');
+        error = prompt('paste error here, without "{" and "}" ', 'code: undefined, message: undefined');
+    } /*
+    Принудительный запрос ввода;
+    Пока возвращается undefined, запрашивать ввод строки;
+    error - хранит возвращённую строку от пользователя;
+    
+    P.S.:
+    если бы обрабатывался сразу ассоциативный массив, здесь и далее не пришлось бы разбивать строку и преобразовывать типы;
+    Я бы тогда поступил так:
+    
+    system_msg = { code: 0, message: "OK. Operation was been success" };
+    
+    <...>
+    
+    system_msg.processing = function() {
+     
+     switch (system_msg_processing.code)
+     <...>
     }
+    <...>
+    
+    */
+    
+   
 
 
     while (code_value == undefined && message_value == undefined ) {
@@ -23,7 +44,7 @@
 
             var foo  = divide[0].split(': ');
 
-            code_value = parseInt (foo[1]);
+            code_value = parseInt (foo[1]);         // code_value - хранит преобразованный в число фрагмент строки с кодом
         }
 
         for ( c=0; c<divide.length; c++ ) {
@@ -36,40 +57,42 @@
     }
 
 
-    var x, y, error_processing = {
+    var x, y, system_msg_processing = {
 
         code: code_value,
         message: message_value,
 
         def_code: function () {
 
-            switch (error_processing.code) {
+            switch (system_msg_processing.code) {
                 case 450:
                     console.log("OK");
                     break;
                 case 506:
-                    alert(error_processing.message);
+                    alert(system_msg_processing.message);
                     break;
                 case 310:
                     window.open('https://yandex.ru/');
                     break;
                 case 570:
                     console.log('ERROR');
-                    alert(error_processing.message);
+                    alert(system_msg_processing.message);
                     break;
                 case 605:
                     var div = document.createElement('div');
                     div.className = "alert alert-success";
                     document.body.appendChild(div);
-                    div.appendChild(document.createTextNode(error_processing.message));
+                    div.appendChild(document.createTextNode(system_msg_processing.message));
                     break;
+                default:
+                    alert('ERROR: unexpected code');
             }
 
         }
 
     }
 
-    error_processing.def_code();
+    system_msg_processing.def_code();
 
 
 </script>
