@@ -7,6 +7,8 @@
 
 <script>
     
+    //НАЧАЛО блока кода для демонстрации работоспособности
+    
     var system_msg, code_value, message_value; // инициализация переменных без задания типа;
 
     while (system_msg == undefined) {
@@ -44,7 +46,7 @@
 
             var foo  = divide[0].split(': ');
 
-            code_value = parseInt (foo[1]);         // code_value - хранит преобразованный в число фрагмент строки с кодом
+            code_value = parseInt (foo[1]);       
         }
 
         for ( c=0; c<divide.length; c++ ) {
@@ -54,35 +56,42 @@
             message_value = foo[1];
         }
 
-    }
+    } 
+    
+    
 
 
     var x, y, system_msg_processing = {
 
         code: code_value,
         message: message_value,
+    }
+        
+     //КОНЕЦ БЛОКА КОДА ДЛЯ ДЕМОНСТРАЦИИ РАБОТОСПОСОБНОСТИ   
 
-        def_code: function () {
+    //НАЧАЛО основного кода
+    
+        system_msg.processing = function () {
 
-            switch (system_msg_processing.code) {
+            switch (system_msg.code) {
                 case 450:
                     console.log("OK");
                     break;
                 case 506:
-                    alert(system_msg_processing.message);
+                    alert(system_msg.message);
                     break;
                 case 310:
                     window.open('https://yandex.ru/');
                     break;
                 case 570:
                     console.log('ERROR');
-                    alert(system_msg_processing.message);
+                    alert(system_msg.message);
                     break;
                 case 605:
                     var div = document.createElement('div');
                     div.className = "code_605";
                     document.body.appendChild(div);
-                    div.appendChild(document.createTextNode(system_msg_processing.message));
+                    div.appendChild(document.createTextNode(system_msg.message));
                     break;
                 default:
                     alert('ERROR: unexpected code');
@@ -92,7 +101,7 @@
 
     }
 
-    system_msg_processing.def_code();
+    system_msg.processing();
 
 
 </script>
