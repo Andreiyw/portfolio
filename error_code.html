@@ -7,10 +7,10 @@
 
 <script>
     
-    var error, code_value, message_value; // инициализация переменных без задания типа;
+    var system_msg, code_value, message_value; // инициализация переменных без задания типа;
 
-    while (error == undefined) {
-        error = prompt('paste error here, without "{" and "}" ', 'code: undefined, message: undefined');
+    while (system_msg == undefined) {
+        system_msg = prompt('paste system meesage here, without "{" and "}" ', 'code: undefined, message: undefined');
     } /*
     Принудительный запрос ввода;
     Пока возвращается undefined, запрашивать ввод строки;
@@ -38,7 +38,7 @@
 
     while (code_value == undefined && message_value == undefined ) {
 
-        var divide = error.split(',');
+        var divide = system_msg.split(',');
 
         for ( c=0; c<divide.length; c++ ) {
 
